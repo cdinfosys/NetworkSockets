@@ -7,8 +7,26 @@ namespace AbcdEFramework
     {
         void SocketBase::Bind(const SocketAddress& sockaddr)
         {
-            int result = bind(this->_socketHandle, sockaddr.GetSocketAddress(), sockaddr.GetAddressLength());
-            if (result < 0)
+            int result = ::bind(this->mSocketHandle, sockaddr.GetSocketAddress(), sockaddr.GetAddressLength());
+            if (result == -1)
+            {
+                throw SocketException(SocketException::GetErrNo());
+            }
+        }
+
+        void SocketBase::Listen(int backlog)
+        {
+            int result = ::listen(this->mSocketHandle, backlog);
+            if (result == -1)
+            {
+                throw SocketException(SocketException::GetErrNo());
+            }
+        }
+
+        void SocketBase::Connect(const SocketAddress& sockaddr)
+        {
+            int result = ::connect(this->mSocketHandle, sockaddr.GetSocketAddress(), sockaddr.GetAddressLength());
+            if (result == -1)
             {
                 throw SocketException(SocketException::GetErrNo());
             }

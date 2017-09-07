@@ -21,43 +21,28 @@
     <ClInclude Include="targetver.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SocketTypeDefs.hpp">
+    <ClInclude Include="..\src\BerkelySocket.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SocketAddress.hpp">
+    <ClInclude Include="..\src\SocketAddress.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SocketAddressIp4.hpp">
+    <ClInclude Include="..\src\SocketAddressIp4.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SocketException.hpp">
+    <ClInclude Include="..\src\SocketBase.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\BerkelySocket.hpp">
+    <ClInclude Include="..\src\SocketException.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SocketBase.hpp">
+    <ClInclude Include="..\src\SocketTypeDefs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\WinSock.hpp">
+    <ClInclude Include="..\src\WinSock.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\NetworkSocketsLib.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\OsPlatform.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SocketCreationParam.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\IPv4StreamSocketCreationParam.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SocketAddressResult.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SocketSendBuffer.hpp">
+    <ClInclude Include="..\src\SocketSendBuffer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,16 +50,16 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SocketAddressIp4.cpp">
+    <ClCompile Include="..\src\BerkelySocket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\BerkelySocket.cpp">
+    <ClCompile Include="..\src\SocketAddressIp4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SocketBase.cpp">
+    <ClCompile Include="..\src\SocketBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\WinSock.cpp">
+    <ClCompile Include="..\src\WinSock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

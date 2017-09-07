@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <string>
 #include "SocketTypeDefs.hpp"
-#include "../OsPlatform.hpp"
+#include "OsPlatform.hpp"
 
 namespace AbcdEFramework
 {

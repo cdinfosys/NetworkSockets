@@ -4,7 +4,7 @@
 #ifndef SOCKET_TYPE_DEF_4BCD29D72EAC49FC9D0580AE479EA8C6
 #define SOCKET_TYPE_DEF_4BCD29D72EAC49FC9D0580AE479EA8C6 1
 
-#include "../OsPlatform.hpp"
+#include "OsPlatform.hpp"
 
 // The sockets header file location differs for Windows and Linux
 #if (AEFRAMEWORK_OS_PLATFORM == PLATFORM_GNU_LINUX)

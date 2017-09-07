@@ -1,8 +1,14 @@
 #ifndef WINSOCK_00D32D06F33446DA915F20FB163B057B
 #define WINSOCK_00D32D06F33446DA915F20FB163B057B 1
 
+#include "OsPlatform.hpp"
+// This code will not compile on GNU/Linux
+#if (AEFRAMEWORK_OS_PLATFORM == PLATFORM_WINDOWS)
 #include <utility>
+//#include <Windows.h>
+
 #include "SocketBase.hpp"
+#include "SocketCreationParam.hpp"
 
 namespace AbcdEFramework
 {
@@ -17,39 +23,43 @@ namespace AbcdEFramework
                 /**
                  * @brief Construct a socket object.
                  */
-                inline WinSock(int domain, int type, int protocol);
+                inline WinSock(const SocketCreationParam& createParam);
 
-                /**
-                 * @brief Copy constructor.
-                 * @param src Object from where the values are copied.
-                 */
-                WinSock(const WinSock& src) = delete;
-
-                /**
-                 * @brief Move constructor.
-                 * @param src Object from where the values are copied.
-                 */
                 inline WinSock(WinSock&& src);
-                
+
                 /**
                  * @brief Destructor
                  */
-                virtual inline ~WinSock();
+                virtual ~WinSock();
+
+            protected:
+                /**
+                 * @brief Hidden constructor to construct a socket object from a socket handle.
+                 * @param fdSocket Handle of the socket.
+                 * @note This constructor overload exists for the convenience of the \c Accept() method and should not be used by other methods.
+                 */
+                inline WinSock(AEF_HSOCKET fdSocket);
 
             public:
-                /**
-                 * @brief Copy assignment operator
-                 * @param src Object from where the values are copied.
-                 * @returns Returns a reference to this object.
-                 */
-                WinSock operator=(const WinSock& src) = delete;
+               /**
+                * @brief Accepts a socket connection and returns a new socket for the connection.
+                * @returns Returns a socket object for the connection.
+                */
+                WinSock Accept();
 
                 /**
-                 * @brief Move assignment operator
-                 * @param src Object from where the values are copied.
-                 * @returns Returns a reference to this object.
+                 * @brief Accepts a socket connection and returns a new socket for the connection.
+                 * @param peerAddress Reference to a \c SocketAddressResult object that receives the address of the peer socket.
+                 * @returns Returns a socket object for the connection.
                  */
-                inline WinSock& operator=(WinSock&& src);
+                WinSock Accept(SocketAddressResult& peerAddress);
+
+                /**
+                 * @brief Send the contents of the buffer to the peer socket.
+                 * @param buffer Reference to an object derived from \c SocketSendBuffer that supplies the data.
+                 * @param flags Send flags.
+                 */
+                void Send(const SocketSendBuffer& buffer, int flags = 0);
 
             private:
                 /**
@@ -58,35 +68,40 @@ namespace AbcdEFramework
                  * @param type
                  * @param protocol
                  */
-                inline AEF_HSOCKET CreateSocket(int domain, int type, int protocol);
+                static AEF_HSOCKET CreateSocket(const SocketCreationParam& createParam);
+
+            private:
+                /**
+                 * @brief Copy constructor.
+                 * @param src Object from where the values are copied.
+                 */
+                WinSock(const WinSock& src) = delete;
+
+                /**
+                 * @brief Copy assignment operator
+                 * @param src Object from where the values are copied.
+                 * @returns Returns a reference to this object.
+                 */
+                WinSock operator=(const WinSock& src) = delete;
         }; // class WinSock
 
-        inline WinSock::WinSock(int domain, int type, int protocol)
-            :   SocketBase(CreateSocket(domain, type, protocol))
+        inline WinSock::WinSock(AEF_HSOCKET fdSocket)
+            :   SocketBase(fdSocket)
         {
         }
 
-        inline WinSock::~WinSock()
+        inline WinSock::WinSock(const SocketCreationParam& createParam)
+            :   SocketBase(CreateSocket(createParam))
         {
-            closesocket(GetSocketHandle());
         }
 
         inline WinSock::WinSock(WinSock&& src)
             :   SocketBase(std::move(src))
         {
         }
-
-        inline WinSock& WinSock::operator=(WinSock&& src)
-        {
-            SocketBase::operator=(std::move(src));
-            return *this;
-        } 
-
-        inline AEF_HSOCKET WinSock::CreateSocket(int domain, int type, int protocol)
-        {
-            return (AEF_HSOCKET)socket(domain, type, protocol);
-        }
     } // namespace Sockets
 } // namespace AbcdEFramework
+
+#endif // AEFRAMEWORK_OS_PLATFORM
 
 #endif // WINSOCK_00D32D06F33446DA915F20FB163B057B

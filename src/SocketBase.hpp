@@ -1,9 +1,11 @@
 #ifndef SOCKET_BASE_709ADD2B710C45718EBEE0BAC41209A7
 #define SOCKET_BASE_709ADD2B710C45718EBEE0BAC41209A7 1
 
-#include "../OsPlatform.hpp"
+#include "OsPlatform.hpp"
 #include "SocketTypeDefs.hpp"
 #include "SocketAddress.hpp"
+#include "SocketAddressResult.hpp"
+#include "SocketSendBuffer.hpp"
 
 #if (AEFRAMEWORK_OS_PLATFORM == PLATFORM_GNU_LINUX)
     #include <sys/socket.h>
@@ -25,7 +27,7 @@ namespace AbcdEFramework
         class SocketBase
         {
             private:
-                AEF_HSOCKET _socketHandle; ///< Stores the socket handle / file descriptor
+                AEF_HSOCKET mSocketHandle; ///< Stores the socket handle / file descriptor
 
             protected:
                 /**
@@ -34,14 +36,6 @@ namespace AbcdEFramework
                  */
                 inline SocketBase(AEF_HSOCKET socketHandle);
 
-            private:
-                /**
-                 * @brief Copy constructor.
-                 * @param src Object from where the values are copied.
-                 */
-                SocketBase(const SocketBase& src) = delete;
-
-            public:
                 /**
                  * @brief Move constructor.
                  * @param src Object from where the values are copied.
@@ -54,28 +48,24 @@ namespace AbcdEFramework
                  */
                 virtual inline ~SocketBase();
 
-            private:
-                /**
-                 * @brief Copy assignment operator
-                 * @param src Object from where the values are copied.
-                 * @returns Returns a reference to this object.
-                 */
-                SocketBase& operator=(const SocketBase& src) = delete;
-
             public:
                 /**
-                 * @brief Move assignment operator
-                 * @param src Object from where the values are copied.
-                 * @returns Returns a reference to this object.
+                 * @brief Turn the socket into a passive socket
+                 * @param backlog Maximum queue length for pending connections.
                  */
-                inline SocketBase& operator=(SocketBase&& src);
+                void Listen(int backlog = SOMAXCONN);
 
-            public:
                 /**
                  * @brief Bind to a socket.
                  * @param sockaddr Reference to a \c SocketAddress derived socket address object.
                  */
                 void Bind(const SocketAddress& sockaddr);
+
+                /**
+                 * @brief Turn the socket into an active socket
+                 * @param sockAddr Address of the remote socket to connect to.
+                 */
+                void Connect(const SocketAddress& sockaddr);
 
             protected:
                 /**
@@ -83,34 +73,40 @@ namespace AbcdEFramework
                  */
                 inline AEF_HSOCKET GetSocketHandle() const;
 
+            private:
+                /**
+                 * @brief Copy constructor.
+                 * @param src Object from where the values are copied.
+                 */
+                SocketBase(const SocketBase& src) = delete;
+
+                /**
+                 * @brief Copy assignment operator
+                 * @param src Object from where the values are copied.
+                 * @returns Returns a reference to this object.
+                 */
+                SocketBase& operator=(const SocketBase& src) = delete;
         }; // class SocketBase
 
         inline SocketBase::SocketBase(AEF_HSOCKET socketHandle)
-            :   _socketHandle(socketHandle)
+            :   mSocketHandle(socketHandle)
         {
+        }
+
+        inline SocketBase::SocketBase(SocketBase&& src)
+            :   mSocketHandle(src.mSocketHandle)
+        {
+            src.mSocketHandle = AEF_NULL_SOCKET_HANDLE;
         }
 
         inline SocketBase::~SocketBase()
         {
-            this->_socketHandle = AEF_NULL_SOCKET_HANDLE;
+            this->mSocketHandle = AEF_NULL_SOCKET_HANDLE;
         }
-
-        inline SocketBase::SocketBase(SocketBase&& src)
-            :   _socketHandle(src._socketHandle)
-        {
-            src._socketHandle = AEF_NULL_SOCKET_HANDLE;
-        }
-
-        inline SocketBase& SocketBase::operator=(SocketBase&& src)
-        {
-            this->_socketHandle = src._socketHandle;
-            src._socketHandle = AEF_NULL_SOCKET_HANDLE;
-            return *this;
-        } 
 
         inline AEF_HSOCKET SocketBase::GetSocketHandle() const
         {
-            return this->_socketHandle;
+            return this->mSocketHandle;
         }
     } // namespace Sockets
 } // namespace AbcdEFramework

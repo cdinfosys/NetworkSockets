@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkSocketsLibTester", "NetworkSocketsLibTester.vcxproj", "{E3448297-79E5-44BD-9F4D-C0EA8602A910}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StreamSocketServerDemo", "StreamSocketServerDemo\StreamSocketServerDemo.vcxproj", "{CE750EBC-609B-4638-89C9-CA5E82D3F475}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StreamSocketClientDemo", "StreamSocketClientDemo\StreamSocketClientDemo.vcxproj", "{E48BE3AD-ED55-4EF5-8EEB-4D2E01399532}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +25,22 @@ Global
 		{E3448297-79E5-44BD-9F4D-C0EA8602A910}.Release|x64.Build.0 = Release|x64
 		{E3448297-79E5-44BD-9F4D-C0EA8602A910}.Release|x86.ActiveCfg = Release|Win32
 		{E3448297-79E5-44BD-9F4D-C0EA8602A910}.Release|x86.Build.0 = Release|Win32
+		{CE750EBC-609B-4638-89C9-CA5E82D3F475}.Debug|x64.ActiveCfg = Debug|x64
+		{CE750EBC-609B-4638-89C9-CA5E82D3F475}.Debug|x64.Build.0 = Debug|x64
+		{CE750EBC-609B-4638-89C9-CA5E82D3F475}.Debug|x86.ActiveCfg = Debug|Win32
+		{CE750EBC-609B-4638-89C9-CA5E82D3F475}.Debug|x86.Build.0 = Debug|Win32
+		{CE750EBC-609B-4638-89C9-CA5E82D3F475}.Release|x64.ActiveCfg = Release|x64
+		{CE750EBC-609B-4638-89C9-CA5E82D3F475}.Release|x64.Build.0 = Release|x64
+		{CE750EBC-609B-4638-89C9-CA5E82D3F475}.Release|x86.ActiveCfg = Release|Win32
+		{CE750EBC-609B-4638-89C9-CA5E82D3F475}.Release|x86.Build.0 = Release|Win32
+		{E48BE3AD-ED55-4EF5-8EEB-4D2E01399532}.Debug|x64.ActiveCfg = Debug|x64
+		{E48BE3AD-ED55-4EF5-8EEB-4D2E01399532}.Debug|x64.Build.0 = Debug|x64
+		{E48BE3AD-ED55-4EF5-8EEB-4D2E01399532}.Debug|x86.ActiveCfg = Debug|Win32
+		{E48BE3AD-ED55-4EF5-8EEB-4D2E01399532}.Debug|x86.Build.0 = Debug|Win32
+		{E48BE3AD-ED55-4EF5-8EEB-4D2E01399532}.Release|x64.ActiveCfg = Release|x64
+		{E48BE3AD-ED55-4EF5-8EEB-4D2E01399532}.Release|x64.Build.0 = Release|x64
+		{E48BE3AD-ED55-4EF5-8EEB-4D2E01399532}.Release|x86.ActiveCfg = Release|Win32
+		{E48BE3AD-ED55-4EF5-8EEB-4D2E01399532}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

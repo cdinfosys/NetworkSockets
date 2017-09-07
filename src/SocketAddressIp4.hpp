@@ -28,36 +28,16 @@ namespace AbcdEFramework
                 SocketAddressIp4(const std::string& ipAddress, unsigned int port);
 
                 /**
-                 * @brief Copy constructor.
-                 * @param src Object from where the values are copied.
+                 * @brief Construct an object with an port number and IP address set to INADDR_ANY
+                 * @param port Port number.
+                 * @note The address must be a standart IPv4 dotted address (e.g. 127.0.0.1)
                  */
-                //SocketAddressIp4(const SocketAddressIp4& src);
+                SocketAddressIp4(unsigned int port);
 
-                /**
-                 * @brief Move constructor.
-                 * @param src Object from where the values are copied.
-                 */
-                //SocketAddressIp4(SocketAddressIp4&& src);
-                
                 /**
                  * @brief Destructor
                  */
                 virtual inline ~SocketAddressIp4();
-
-            public:
-                /**
-                 * @brief Copy assignment operator
-                 * @param src Object from where the values are copied.
-                 * @returns Returns a reference to this object.
-                 */
-                //SocketAddressIp4 operator=(const SocketAddressIp4& src);
-
-                /**
-                 * @brief Move assignment operator
-                 * @param src Object from where the values are copied.
-                 * @returns Returns a reference to this object.
-                 */
-                //SocketAddressIp4 operator=(SocketAddressIp4&& src);
 
             public:
                 /**

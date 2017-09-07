@@ -12,7 +12,7 @@ namespace AbcdEFramework
             this->_address.sin_family = AF_INET;
 
             int ptonResult;
-            if ((ptonResult = inet_pton(AF_INET, ipAddress.c_str(), &(this->_address.sin_addr)) != 1))
+            if ((ptonResult = inet_pton(AF_INET, ipAddress.c_str(), &(this->_address.sin_addr))) != 1)
             {
                 if (ptonResult == 0)
                 {
@@ -23,6 +23,17 @@ namespace AbcdEFramework
                     throw SocketException(EAFNOSUPPORT);
                 }
             }
+
+            // Store the port number in network byte order.
+            this->_address.sin_port = htons((uint16_t)port);
+        }
+
+        SocketAddressIp4::SocketAddressIp4(unsigned int port)
+        {
+            memset(&this->_address, 0, sizeof(this->_address));
+            this->_address.sin_family = AF_INET;
+
+            this->_address.sin_addr.s_addr = htonl(INADDR_ANY);
 
             // Store the port number in network byte order.
             this->_address.sin_port = htons((uint16_t)port);
